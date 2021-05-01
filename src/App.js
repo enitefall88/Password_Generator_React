@@ -13,12 +13,16 @@ export default function App() {
   let [withSymbols, setWithSymbols] = useState(false)
   let [password, setPassword] = useState("")
 
-  function doGeneratePassword() {
+  function generatePassword(withLowercase, withUppercase, withSymbols, withLength) {
     let alphabet = NUMBERS
       + (withLowercase ? LOWERCASE : "")
       + (withUppercase ? UPPERCASE : "")
       + (withSymbols   ? SYMBOLS   : "")
-    setPassword(customAlphabet(alphabet, withLength)())
+    return (customAlphabet(alphabet, withLength)())
+  }
+
+  function doGeneratePassword() {
+    setPassword(generatePassword(withLowercase, withUppercase, withSymbols, withLength))
   }
 
   return <div className="p-3">
